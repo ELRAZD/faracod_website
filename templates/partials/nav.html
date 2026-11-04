@@ -1,0 +1,35 @@
+{% load static %}
+<section class="nav-head section">
+  <nav class="navbar navbar-expand-md container">
+    <a href="{% url 'core:home' %}" class="navbar-brand font-weight-bold">
+      {% if site_settings.logo %}
+        <img src="{{ site_settings.logo.url }}" alt="logo">
+      {% else %}
+        <img src="{% static 'img/logo (2).png' %}" alt="logo">
+      {% endif %}
+      {{ site_settings.site_name }}
+    </a>
+    <button class="navbar-toggler bg-white" type="button"
+            data-toggle="collapse" data-target="#mynav"
+            aria-controls="mynav" aria-expanded="false"
+            aria-label="toggle-navigation">
+      <span class="navbar-icon"><i class="fas fa-bars"></i></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mynav">
+      <ul class="navbar-nav mx-auto">
+        <a class="nav-link nav-item pr-3 home active-nav" data-text="خانه" href="#home">خانه</a>
+        <a class="nav-link nav-item pr-3 features" data-text="ویژگی ها" href="#features">ویژگی ها</a>
+        <a class="nav-link nav-item pr-3 about-us" data-text="درباره ما" href="#about-us">درباره ما</a>
+        <a class="nav-link nav-item pr-3 projects" data-text="پروژه ها" href="#projects">پروژه ها</a>
+        <a class="nav-link nav-item pr-3 options d-md-none" data-text="خدمات" href="#options">خدمات</a>
+        <a class="nav-link nav-item pr-3 conect" data-text="تماس با ما" href="#conect">تماس با ما</a>
+      </ul>
+      <button type="button" class="btn login-btn animate-btn"
+              data-toggle="modal" data-target="#exampleModal">
+        پروژه ای دارید؟
+      </button>
+    </div>
+  </nav>
+</section>
+
+{% include 'partials/project_modal.html' %}

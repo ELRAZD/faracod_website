@@ -1,0 +1,8 @@
+{% load static %}
+<div class="preloader d-flex align-items-center justify-content-center">
+  {% if site_settings.preloader %}
+    <img src="{{ site_settings.preloader.url }}" alt="preloader">
+  {% else %}
+    <img src="{% static 'img/preloader.gif' %}" alt="preloader">
+  {% endif %}
+</div>

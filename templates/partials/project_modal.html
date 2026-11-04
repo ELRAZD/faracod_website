@@ -1,0 +1,35 @@
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">پروژه خود را ثبت کنید</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="myModalBody">
+        <form method="post" action="{% url 'core:home' %}" novalidate>
+          {% csrf_token %}
+          <input type="hidden" name="form_type" value="project">
+          {% if project_form.errors %}
+            <div class="alert alert-danger">
+              {% for field in project_form %}
+                {% for error in field.errors %}<p class="mb-1">{{ field.label }}: {{ error }}</p>{% endfor %}
+              {% endfor %}
+            </div>
+          {% endif %}
+          <div class="form-group py-5 py-lg-0">
+            {{ project_form.name }}
+            {{ project_form.email }}
+            {{ project_form.subject }}
+            {{ project_form.message }}
+            <div class="modal-footer">
+              <button type="submit" class="btn message-btn">ارسال پیام</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

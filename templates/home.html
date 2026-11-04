@@ -1,0 +1,311 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <!-- ===== Hero ===== -->
+    <section class="header-section" id="home">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 col-lg-6 my-5">
+                    <div class="head-special">
+                        <h3 class="rounded">{{ hero.badge }}</h3>
+                    </div>
+                    <div class="head-name">
+                        <h1 class="head-name-faracode">{{ hero.title }}</h1>
+                    </div>
+                    <div class="head-text">
+                        <p class="text-justify">{{ hero.description }}</p>
+                    </div>
+                    <div class="head-btn-group">
+                        <a class="btn head-btn ml-2 d-none d-md-inline-block"
+                           href="{{ hero.primary_btn_url }}">{{ hero.primary_btn_text }}</a>
+                        <a class="btn head-btn d-none d-md-inline-block"
+                           href="{{ hero.secondary_btn_url }}">{{ hero.secondary_btn_text }}</a>
+                    </div>
+                </div>
+                <div class="col-md-10 col-lg-6">
+                    {% if hero.image %}
+                        <img src="{{ hero.image.url }}" alt="img" class="img-fluid header-img">
+                    {% else %}
+                        <img src="{% static 'img/img3.png' %}" alt="img" class="img-fluid header-img">
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="custom-shape-divider-top-1630509570">
+        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg"
+             viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"
+                  class="shape-fill"></path>
+        </svg>
+    </div>
+
+    <!-- ===== Activity ===== -->
+    <section class="activity container py-4 section" id="features">
+        <div class="activity-head">
+            <span class="d-inline-block font-weight-bold rounded activity-info my-2">فعالیت های ما در یک نگاه</span>
+            <h1 class="activity-name">گروه برنامه نویسی <span
+                    class="font-weight-bold">{{ site_settings.site_name }}</span></h1>
+            <p class="activity-text">تیم برنامه نویسی {{ site_settings.site_name }} پل میان شما و تکنولوژی!</p>
+        </div>
+        <div class="row py-5">
+            {% for item in activities %}
+                <div class="col-12 col-md-6 col-lg-3 py-3">
+                    <div class="activity-img py-3">
+                        {% if item.image %}
+                            <img src="{{ item.image.url }}" alt="{{ item.title }}">
+                        {% elif item.icon %}
+                            <img src="{% static 'img/' %}{{ item.icon }}" alt="{{ item.title }}">
+                        {% endif %}
+                    </div>
+                    <h5 class="activity-name">{{ item.title }}</h5>
+                    <p class="activity-text">{{ item.text }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- ===== About ===== -->
+    <section class="about-us container section" id="about-us">
+        <div class="row">
+            <div class="col-12 col-lg-6 ssss">
+                {% if about.image %}
+                    <img src="{{ about.image.url }}" alt="about" class="img-fluid">
+                {% else %}
+                    <img src="{% static 'img/digital-1.png' %}" alt="about" class="img-fluid">
+                {% endif %}
+            </div>
+            <div class="col-12 col-lg-6 py-4 pt-lg-0">
+                <span class="d-inline-block rounded font-weight-bold activity-info my-2">{{ about.badge }}</span>
+                <h5 class="activity-name">{{ about.title }}</h5>
+                <p class="text-justify about-us-text">{{ about.description }}</p>
+                <div class="row">
+                    {% for f in about_features %}
+                        <div class="col-12 col-md-6 d-flex py-2">
+                            {% if f.image %}
+                                <img src="{{ f.image.url }}" alt="" class="feature-img pl-2">
+                            {% elif f.icon %}
+                                <img src="{% static 'img/' %}{{ f.icon }}" alt="" class="feature-img pl-2">
+                            {% endif %}
+                            <h6 class="about-text font-weight-bold">{{ f.title }}</h6>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Projects ===== -->
+    <section class="container projectss py-5 section mt-4" id="projects">
+        <div class="text-center">
+            <span class="d-inline-block rounded font-weight-bold activity-info my-2">پروژه های خلاقانه</span>
+            <h1 class="activity-name">آخرین کارهای ما</h1>
+            <p class="activity-text">موارد زیر نمونه کوچکی از فعالیت های ما در حوزه طراحی و ساخت اپلیکیشن و وبسایت
+                است.</p>
+        </div>
+        <div class="animation-project d-none d-md-inline-block"></div>
+        <div class="row gallery">
+            {% for project in projects %}
+                <div class="col-12 col-md-6 col-lg-4 py-4 d-flex align-items-center justify-content-center gallery-img">
+                    <div class="img-pro">
+                        <div class="addition">
+                            {% if project.image %}
+                                <img src="{{ project.image.url }}" alt="" class="img-fluid pro-photo">
+                            {% else %}
+                                <img src="{% static 'img/project1.jpg' %}" alt="" class="img-fluid pro-photo">
+                            {% endif %}
+                            <i class="fas fa-search pro-link"></i>
+                        </div>
+                        <div class="py-2 pro-name-activity w-100 text-center">
+                            <a href="{{ project.link|default:'#' }}"
+                               class="pro-name font-weight-bold text-center"
+                               {% if project.link and project.open_in_new_tab %}target="_blank"
+                               rel="noopener noreferrer"{% endif %}>
+                                {{ project.title }}
+                            </a>
+                            <p class="pro-activity">{{ project.category }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- ===== Preview box (برای لایت‌باکس JS) ===== -->
+    <div class="preview-box">
+        <div class="detail">
+            <span><p class="current-img"></p>/<p class="total-img"></p></span>
+            <span class="iconClose"><i class="fas fa-times"></i></span>
+        </div>
+        <div class="img-box">
+            <div class="slide prev"><i class="fas fa-angle-left"></i></div>
+            <div class="slide next"><i class="fas fa-angle-right"></i></div>
+            <img src="{% static 'img/futfinal.jpg' %}" alt="">
+        </div>
+    </div>
+    <div class="shadow"></div>
+
+    <!-- ===== Content / Video ===== -->
+    <section class="container contant">
+        <div class="row d-flex align-items-center">
+            <div class="col-12 col-lg-6">
+                <span class="d-inline-block font-weight-bold rounded contant-info my-2">{{ content_block.badge }}</span>
+                <h5 class="contant-name">{{ content_block.title }}</h5>
+                <p class="text-justify contant-text">{{ content_block.description }}</p>
+                {% for item in content_items %}
+                    <div class="contant-box d-flex my-3">
+                        <div class="contant-box-icon"><i class="fa fa-check contant-icon"></i></div>
+                        <div class="contant-box-info mr-2">
+                            <h4 class="contant-box-title">{{ item.title }}</h4>
+                            <p class="contant-box-text">{{ item.text }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="col-12 col-lg-6">
+                {% if content_block.video_thumbnail %}
+                    <img src="{{ content_block.video_thumbnail.url }}" alt="video-bg" class="img-fluid video-bg">
+                {% else %}
+                    <img src="{% static 'img/video-bg.jpg' %}" alt="video-bg" class="img-fluid video-bg">
+                {% endif %}
+                <div class="video-icon">
+                    <div class="btn video-btn" onclick="playvideo()" id="videobtn">
+                        <i class="fa fa-play"></i>
+                    </div>
+                </div>
+                <div class="video">
+                    <video width="100%" id="myVideo" controls loop autoplay>
+                        {% if content_block.video %}
+                            <source src="{{ content_block.video.url }}" type="video/mp4">
+                        {% else %}
+                            <source src="{% static 'video/video1.mp4' %}" type="video/mp4">
+                        {% endif %}
+                    </video>
+                    <img src="{% static 'img/close.png' %}" class="close-btn" onclick="stopPlayer()" alt="">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== Options ===== -->
+    <section class="container option py-5 d-block d-md-none" id="options">
+        <div class="row">
+            {% for item in options %}
+                <div class="col-12 col-md-6 col-lg-4 my-2">
+                    <div class="img-option rounded">
+                        {% if item.image %}
+                            <img src="{{ item.image.url }}" alt="optionimg" class="img-fluid rounded position-relative">
+                        {% elif item.icon %}
+                            <img src="{% static 'img/' %}{{ item.icon }}" alt="optionimg"
+                                 class="img-fluid rounded position-relative">
+                        {% endif %}
+                    </div>
+                    <div class="option-text w-75 py-3 pr-3">{{ item.title }}</div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section class="container my-5 options d-none d-md-block" id="optionss">
+        <div class="row justify-content-around">
+            {% for item in options reversed %}
+                <div class="item-opt">
+                    <div class="opt my-2">
+                        <div class="wrapper">
+                            {% if item.image %}
+                                <img src="{{ item.image.url }}" alt="option" class="img-fluid">
+                            {% elif item.icon %}
+                                <img src="{% static 'img/' %}{{ item.icon }}" alt="option" class="img-fluid">
+                            {% endif %}
+                            <div class="title-opt text-center">{{ item.title }}</div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- ===== Introduce ===== -->
+    <section class="introduce">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-12 col-lg-4 pl-4">
+                    <span class="d-inline-block font-weight-bold contant-info my-2">با تکنولوژی دوست باشیم</span>
+                    <h5 class="contant-name">گروه برنامه نویسی {{ site_settings.site_name }} با دریچه ای رو به تکنولوژی
+                        روز دنیا!</h5>
+                    <p class="text-justify contant-text text-white">
+                        اعضای تیم ما روی اهداف تعیین شده توافق دارند و عملکرد خود را با توجه به اهداف می‌سنجند...
+                    </p>
+                </div>
+                <div class="col-12 col-lg-8 py-3">
+                    <div class="row">
+                        {% for f in introduce_features %}
+                            <div class="col-12 col-md-6 d-flex introduce-box rounded py-4 my-2">
+                                {% if f.image %}
+                                    <img src="{{ f.image.url }}" alt="" class="pl-3 introduce-img">
+                                {% elif f.icon %}
+                                    <img src="{% static 'img/' %}{{ f.icon }}" alt="" class="pl-3 introduce-img">
+                                {% endif %}
+                                <div class="">
+                                    <h3 class="introduce-box-title">{{ f.title }}</h3>
+                                    <p class="introduce-box-text">{{ f.text }}</p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="custom-shape-divider-top-1630509570">
+        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg"
+             viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z"
+                  class="shape-fill-two"></path>
+        </svg>
+    </div>
+
+    <!-- ===== Contact ===== -->
+    <section class="container conect section" id="conect">
+        <div class="text-center">
+            <span class="d-inline-block rounded font-weight-bold activity-info my-2">تماس با ما</span>
+            <h1 class="activity-name">تماس با ما</h1>
+            <p class="activity-text">
+                از طریق فرم زیر یا چت واتساپ به شماره {{ site_settings.phone }} با ما ارتباط برقرار کنید.
+            </p>
+        </div>
+        <div class="row my-5">
+            <div class="col-12 col-lg-6">
+                <img src="{% static 'img/digital-2.png' %}" alt="contact" class="img-fluid">
+            </div>
+            <div class="col-12 col-lg-6">
+                <form method="post" action="{% url 'core:home' %}" novalidate>
+                    {% csrf_token %}
+                    <input type="hidden" name="form_type" value="contact">
+                    {% if contact_form.errors %}
+                        <div class="alert alert-danger">
+                            {% for field in contact_form %}
+                                {% for error in field.errors %}<p class="mb-1">{{ field.label }}: {{ error }}</p>
+                                {% endfor %}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                    <div class="form-group py-5 py-lg-0">
+                        {{ contact_form.name }}
+                        {{ contact_form.email }}
+                        {{ contact_form.subject }}
+                        {{ contact_form.message }}
+                        <div class="w-100 text-center">
+                            <button type="submit" class="btn message-btn text-center">ارسال پیام</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
